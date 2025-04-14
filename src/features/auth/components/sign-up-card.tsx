@@ -120,7 +120,7 @@ export const SignUpCard = () => {
                             )}
                         />
           <Button size="lg" className="w-full">
-            Login
+            Create Account
           </Button>
         </form>
     </Form>    
