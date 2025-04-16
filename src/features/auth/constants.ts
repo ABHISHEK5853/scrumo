@@ -1,0 +1,1 @@
+export const AUTH_COOKIE = "zoro-scrumo-2044";
