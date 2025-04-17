@@ -10,6 +10,7 @@ import { loginSchema, registerSchema } from "../schemas";
 import { parseSetCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { AUTH_COOKIE } from "../constants";
 import { strict } from "assert";
+import { sessionMiddleware } from "@/lib/session-middleware";
 
 //Login
 const app = new Hono()
@@ -64,8 +65,10 @@ const app = new Hono()
 )
 
     //Logout
-    .post("/logout", (c) => {
+    .post("/logout", sessionMiddleware, async (c) => {
+        const account = c.get("account");
         deleteCookie(c,AUTH_COOKIE);
+        await account.deleteSession("current");
         return c.json({success:true})
     });
 
